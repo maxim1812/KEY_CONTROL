@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Test</title>
+</head>
+<body>
+
+<canvas width = '400' height = '400' id='can'></canvas>
+<h3>
+	Управление: W, A, S, D.
+</h3>
+
+<script>
+
+let left = false;
+let right = false;
+let up = false;
+let down = false;
+
+let can = 0;
+let holst = 0;
+
+let xx = 200;
+let yy = 200;
+
+let t = 0;
+
+function drawFon()
+{
+	holst.clearRect(0,0,400,400);
+	holst.fillRect(0,0,400,400);
+}
+
+function drawHero()
+{
+	holst.strokeRect(xx - 25,yy - 25,50,50);
+}
+
+let speed = 5;
+
+function moveHero()
+{
+	if(up === true) yy -= speed;
+	if(down === true) yy += speed;
+	if(left === true) xx -= speed;
+	if(right === true) xx += speed;
+	drawFon();
+	drawHero();
+}
+
+
+window.onload = function()
+{
+	can = document.getElementById('can');
+	holst = can.getContext('2d');
+	holst.fillStyle = '#0000FF';
+	holst.strokeStyle = '#00FF00';
+	holst.lineWidth = 3;
+	drawFon();
+	drawHero();
+	t = setInterval(moveHero, 50);
+}
+
+window.onkeydown = function(event)
+{
+	const n = event.keyCode;
+	if(n === 87) up = true;
+	if(n === 83) down = true;
+	if(n === 65) left = true;
+	if(n === 68) right = true;
+}
+
+window.onkeyup = function(event)
+{
+	const n = event.keyCode;
+	if(n === 87) up = false;
+	if(n === 83) down = false;
+	if(n === 65) left = false;
+	if(n === 68) right = false;
+}
+
+</script>
+
+</body>
+</html>
